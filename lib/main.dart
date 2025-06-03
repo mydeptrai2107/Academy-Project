@@ -1,6 +1,6 @@
+import 'package:ahmed_academy/Presentation/ClassPerformance/login_screen.dart';
 import 'package:ahmed_academy/Settings/theme/theme.dart';
 import 'package:ahmed_academy/firebase_options.dart';
-import 'package:ahmed_academy/home_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +22,7 @@ class MainApp extends StatelessWidget {
       theme: ThemeData(
           colorSchemeSeed: CustomTheme().selectedTextColor,
           scaffoldBackgroundColor: Colors.grey[150]),
-      home: HomeScreen(),
+      home: const AdminLoginScreen(),
     );
   }
 }

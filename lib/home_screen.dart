@@ -1,3 +1,5 @@
+import 'package:ahmed_academy/Presentation/ClassPerformance/class_performance_screen.dart';
+import 'package:ahmed_academy/Presentation/ClassPerformance/login_screen.dart';
 import 'package:ahmed_academy/Presentation/ManageStudent/add_student.dart';
 import 'package:ahmed_academy/Presentation/ClassList/class_list.dart';
 import 'package:ahmed_academy/Presentation/FeeStatus/fee_months_page.dart';
@@ -54,6 +56,11 @@ class HomeScreen extends StatelessWidget {
         title: "Quiz Review",
       )
     },
+    {
+      "title": "Class Performance",
+      "image": "assets/images/quiz2.png",
+      'link': const StudentPerformancePieChart()
+    },
   ];
 
   Future<void> startNewSession() async {
@@ -90,57 +97,67 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
         actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16.0),
-            child: IconButton(
-              icon: const Icon(Icons.settings_rounded, color: Colors.white),
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (context) => AlertDialog(
-                    title: const Text("Start New Session"),
-                    content: const Text(
-                      "Are you sure you want to start a new session? This will delete all data from the previous year.",
-                    ),
-                    actions: [
-                      TextButton(
-                        onPressed: () => Navigator.of(context).pop(),
-                        child: const Text("Cancel"),
-                      ),
-                      TextButton(
-                        onPressed: () async {
-                          Navigator.of(context).pop(); // Close the dialog
-
-                          // Optional: show loading dialog
-                          showDialog(
-                            context: context,
-                            barrierDismissible: false,
-                            builder: (_) => const Center(
-                              child: CircularProgressIndicator(),
-                            ),
-                          );
-
-                          await startNewSession(); // Perform deletion or reset
-
-                          if (!context.mounted) return;
-                          Navigator.of(context).pop(); // Close loading
-
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content:
-                                  Text("New session started successfully!"),
-                              backgroundColor: Colors.green,
-                            ),
-                          );
-                        },
-                        child: const Text("Confirm"),
-                      ),
-                    ],
+          IconButton(
+            icon: const Icon(Icons.settings_rounded, color: Colors.white),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: const Text("Start New Session"),
+                  content: const Text(
+                    "Are you sure you want to start a new session? This will delete all data from the previous year.",
                   ),
-                );
-              },
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      child: const Text("Cancel"),
+                    ),
+                    TextButton(
+                      onPressed: () async {
+                        Navigator.of(context).pop(); // Close the dialog
+
+                        // Optional: show loading dialog
+                        showDialog(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (_) => const Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        );
+
+                        await startNewSession(); // Perform deletion or reset
+
+                        if (!context.mounted) return;
+                        Navigator.of(context).pop(); // Close loading
+
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text("New session started successfully!"),
+                            backgroundColor: Colors.green,
+                          ),
+                        );
+                      },
+                      child: const Text("Confirm"),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+          IconButton(
+            onPressed: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const AdminLoginScreen(),
+                ),
+              );
+            },
+            icon: const Icon(
+              Icons.logout,
+              color: Colors.red,
             ),
-          )
+          ),
         ],
         toolbarHeight: 80,
         titleSpacing: 0,

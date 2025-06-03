@@ -17,18 +17,13 @@ class QuizProvider {
         'students': quiz.studentmarks,
         'subject': quiz.subject
       });
-
-      print("✅ Quiz and marks uploaded successfully!");
     } on SocketException {
-      print("❌ Network error: \${e.message}");
       throw Exception(
           "No internet connection. Please check your network and try again.");
     } on FirebaseException {
-      print("❌ FirebaseException: \${e.message}");
       throw Exception(
           "Failed to upload quiz due to Firestore error: \${e.message}");
     } catch (e) {
-      print("❌ Unexpected error uploading quiz: $e");
       throw Exception("Failed to upload quiz due to an unexpected error.");
     }
   }
@@ -50,18 +45,14 @@ class QuizProvider {
         );
       }).toList();
 
-      print("✅ Fetched ${quizzes.length} quizzes for class $classNo");
       return quizzes;
     } on SocketException {
-      print("❌ Network error: \${e.message}");
       throw Exception(
           "No internet connection. Please check your network and try again.");
     } on FirebaseException {
-      print("❌ FirebaseException: \${e.message}");
       throw Exception(
           "Failed to fetch quizzes due to Firestore error: \${e.message}");
     } catch (e) {
-      print("❌ Unexpected error fetching quizzes: $e");
       throw Exception("Failed to fetch quizzes due to an unexpected error.");
     }
   }

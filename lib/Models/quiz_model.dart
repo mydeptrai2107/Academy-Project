@@ -1,4 +1,3 @@
-
 class QuizModel {
   String quizName;
   String subject;
@@ -6,10 +5,11 @@ class QuizModel {
   String classNo;
   Map<String, dynamic> studentmarks;
 
-  QuizModel(
-      {required this.quizName,
-      required this.totalMarks,
-      required this.classNo,
-      required this.subject,
-      required this.studentmarks});
+  QuizModel({
+    required this.quizName,
+    required this.totalMarks,
+    required this.classNo,
+    required this.subject,
+    required this.studentmarks,
+  });
 }
